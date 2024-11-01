@@ -204,7 +204,7 @@ describe('barrel-less', () => {
       .hasEncapsulationViolations({});
   });
 
-  it.skip('should support wildcards', () => {
+  it('should support wildcards', () => {
     assertProject({ encapsulationPattern: '**/internal' })
       .withCustomerRoute({
         feature: {
@@ -226,7 +226,10 @@ describe('barrel-less', () => {
         },
       })
       .hasEncapsulationViolations({
-        'feature/customers.component.ts': ['../data/open.service.ts'],
+        'feature/customers.component.ts': [
+          '../data/sub1/internal/hidden.service.ts',
+          '../data/sub2/sub3/internal/hidden.service.ts',
+        ],
       });
   });
 
